@@ -1,8 +1,10 @@
+from pip._vendor.distlib.metadata import Metadata
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-engine = create_engine('sqlite:///plants.db')
+engine = create_engine("postgresql://postgres:123@localhost/postgres")
 Base = declarative_base()
+metadata=Metadata()
 
 class Plant(Base):
     __tablename__ = 'plants'

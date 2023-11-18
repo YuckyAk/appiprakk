@@ -1,4 +1,4 @@
-from appi.models import Base, engine, Plant, Seed, FruitTree
+from  models import Base, engine, Plant, Seed, FruitTree
 
 Base.metadata.create_all(engine)
 
