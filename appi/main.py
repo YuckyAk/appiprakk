@@ -1,38 +1,68 @@
-from  models import Base, engine, Plant, Seed, FruitTree
+from appi.database import SessionLocal
+from appi.models import Plant, Family, Seed
 
-Base.metadata.create_all(engine)
 
-from sqlalchemy.orm import sessionmaker
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the Plants API!"}
 
-Session = sessionmaker(bind=engine)
-session = Session()
+@app.post("/plants")
+def create_plant(plant: Plant):
+    db = SessionLocal()
+    db.add(plant)
+    db.commit()
+    db.refresh(plant)
+    return plant
 
-# Создание нового растения
-plant1 = Plant(name='Роза', description='Кустарник со цветами различных оттенков.', family_id=1)
-session.add(plant1)
+@app.get("/plants/{plant_id}")
+def get_plant(plant_id: int):
+    db = SessionLocal()
+    plant = db.query(Plant).filter(Plant.id == plant_id).first()
+    return plant
 
-# Создание нового семени
-seed1 = Seed(name='Розовые семена', description='Семена для разведения роз.', plant_id=1)
-session.add(seed1)
+@app.get("/plants")
+def get_all_plants():
+    db = SessionLocal()
+    plants = db.query(Plant).all()
+    return plants
 
-# Создание нового плодового дерева
-fruit_tree1 = FruitTree(name='Яблоня', description='Плодовое дерево, дающее яблоки.', plant_id=1)
-session.add(fruit_tree1)
+@app.post("/families")
+def create_family(family: Family):
+    db = SessionLocal()
+    db.add(family)
+    db.commit()
+    db.refresh(family)
+    return family
 
-session.commit()
+@app.get("/families/{family_id}")
+def get_family(family_id: int):
+    db = SessionLocal()
+    family = db.query(Family).filter(Family.id == family_id).first()
+    return family
 
-# Получение всех растений
-plants = session.query(Plant).all()
-for plant in plants:
-    print(plant.name)
+@app.get("/families")
+def get_all_families():
+    db = SessionLocal()
+    families = db.query(Family).all()
+    return families
 
-# Получение информации о семенах растений
-seeds = session.query(Seed).all()
-for seed in seeds:
-    print(seed.name)
+@app.post("/seeds")
+def create_seed(seed: Seed):
+    db = SessionLocal()
+    db.add(seed)
+    db.commit()
+    db.refresh(seed)
+    return seed
 
-# Получение информации о плодовых деревьях
-fruit_trees = session.query(FruitTree).all()
-for fruit_tree in fruit_trees:
-    print(fruit_tree.name)
+@app.get("/seeds/{seed_id}")
+def get_seed(seed_id: int):
+    db = SessionLocal()
+    seed = db.query(Seed).filter(Seed.id == seed_id).first()
+    return seed
+
+@app.get("/seeds")
+def get_all_seeds():
+    db = SessionLocal()
+    seeds = db.query(Seed).all()
+    return seeds
 
