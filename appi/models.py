@@ -1,8 +1,9 @@
 from fastapi import FastAPI
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, MetaData
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
+metadata = MetaData()
 
 app = FastAPI()
 
