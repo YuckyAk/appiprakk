@@ -1,12 +1,14 @@
-from appi.database import SessionLocal
-from appi.models import Plant, Family, Seed
+from fastapi import FastAPI
+from database import SessionLocal
+from schema import Plant, Family, Seed
 
+app = FastAPI()
 
-@app.get("/")
-def read_root():
-    return {"message": "Welcome to the Plants API!"}
+Plants = []
+Family = []
+Seed = []
 
-@app.post("/plants")
+@app.post("/plants/")
 def create_plant(plant: Plant):
     db = SessionLocal()
     db.add(plant)
@@ -26,13 +28,7 @@ def get_all_plants():
     plants = db.query(Plant).all()
     return plants
 
-@app.post("/families")
-def create_family(family: Family):
-    db = SessionLocal()
-    db.add(family)
-    db.commit()
-    db.refresh(family)
-    return family
+
 
 @app.get("/families/{family_id}")
 def get_family(family_id: int):
@@ -46,13 +42,7 @@ def get_all_families():
     families = db.query(Family).all()
     return families
 
-@app.post("/seeds")
-def create_seed(seed: Seed):
-    db = SessionLocal()
-    db.add(seed)
-    db.commit()
-    db.refresh(seed)
-    return seed
+
 
 @app.get("/seeds/{seed_id}")
 def get_seed(seed_id: int):
