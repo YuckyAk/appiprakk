@@ -14,7 +14,6 @@
     padding: 20px;
     text-align: center;
   }
-
   .menu{
     display: flex;
     flex-direction: row;
@@ -34,11 +33,23 @@
   
   .hero {
     background-image: url('img/priroda.jpg');
+  }
+  li {
+   list-style: none;
+  }
+
+  main {
+    padding: 20px;
+  }
+  
+  .hero {
+    background-image: url('hero.jpg');
     background-size: cover;
     background-position: center;
     text-align: center;
     padding: 100px 0;
     color: #000000;
+    color: #fff;
   }
   
   .hero h2 {
