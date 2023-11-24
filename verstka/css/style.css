@@ -14,21 +14,31 @@
     padding: 20px;
     text-align: center;
   }
+
+  .menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    grid-gap: 20%;
+  }
+
+
   li {
    list-style: none;
   }
 
   main {
     padding: 20px;
+    background-color: #459750;
   }
   
   .hero {
-    background-image: url('hero.jpg');
+    background-image: url('img/priroda.jpg');
     background-size: cover;
     background-position: center;
     text-align: center;
     padding: 100px 0;
-    color: #fff;
+    color: #000000;
   }
   
   .hero h2 {
